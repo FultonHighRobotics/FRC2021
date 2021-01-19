@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
   
 
   DifferentialDrive maindrive = new DifferentialDrive(frontleft, frontright);
-  AutoController autoController = new AutoController(maindrive);
+  AutoController autoController = new AutoController(maindrive, this);
 
   protected final Joystick js1 = new Joystick(0);
   protected final JoystickButton intake = new JoystickButton(js1,1);
