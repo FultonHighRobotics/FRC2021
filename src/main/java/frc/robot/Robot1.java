@@ -75,13 +75,17 @@ public class Robot1 extends TimedRobot {
   }
 
   }
+  
 
 
   @Override
   public void robotPeriodic() {
   }
+  @Override
+  public void simulationPeriodic() {
 
   
+  }
   
   @Override
   public void teleopPeriodic() {

@@ -2,6 +2,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import org.fhsrobo.Autonomous.*;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -10,11 +13,12 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.cscore.VideoSink;
 
+
 public class Robot extends TimedRobot {
 
   UsbCamera UsbCamera1;
   UsbCamera  UsBCamera2;
-  VideoSink server; 
+  VideoSink server;
 
   WPI_TalonSRX frontleft = new WPI_TalonSRX(1);
   WPI_TalonSRX rearleft = new WPI_TalonSRX(3);
@@ -32,7 +36,7 @@ public class Robot extends TimedRobot {
   
 
   DifferentialDrive maindrive = new DifferentialDrive(frontleft, frontright);
-
+  AutoController autoController = new AutoController(maindrive);
 
   protected final Joystick js1 = new Joystick(0);
   protected final JoystickButton intake = new JoystickButton(js1,1);
@@ -51,13 +55,18 @@ public class Robot extends TimedRobot {
     UsbCamera1 = CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
     server = CameraServer.getInstance().getServer();
+    
   }
 
 
   @Override
   public void robotPeriodic() {
+    
   }
-
+  @Override
+  public void autonomousPeriodic() {
+    maindrive.arcadeDrive(-1, -1);
+  }
   
   
   @Override
