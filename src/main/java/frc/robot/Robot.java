@@ -34,15 +34,15 @@ public class Robot extends TimedRobot {
   DifferentialDrive maindrive = new DifferentialDrive(frontleft, frontright);
 
 
-  Joystick js1 = new Joystick(0);
-  JoystickButton intake = new JoystickButton(js1,1);
-  JoystickButton outtake = new JoystickButton(js1,2);
-  JoystickButton dopen = new JoystickButton(js1,3);
-  JoystickButton din = new JoystickButton(js1,4);
-  JoystickButton deployer = new JoystickButton(js1,5);
-  JoystickButton antideploy = new JoystickButton(js1,6);
-  JoystickButton hooky = new JoystickButton(js1,11);
-  JoystickButton kooh = new JoystickButton(js1,12);
+  protected final Joystick js1 = new Joystick(0);
+  protected final JoystickButton intake = new JoystickButton(js1,1);
+  protected final JoystickButton outtake = new JoystickButton(js1,2);
+  protected final JoystickButton dopen = new JoystickButton(js1,3);
+  protected final JoystickButton din = new JoystickButton(js1,4);
+  protected final JoystickButton deployer = new JoystickButton(js1,5);
+  protected final JoystickButton antideploy = new JoystickButton(js1,6);
+  protected final JoystickButton hooky = new JoystickButton(js1,11);
+  protected final JoystickButton kooh = new JoystickButton(js1,12);
   
   public void robotInit() {
     rearleft.follow(frontleft);
@@ -65,6 +65,7 @@ public class Robot extends TimedRobot {
   maindrive.arcadeDrive(js1.getY()*-1,js1.getZ());
 
   if (intake.get() == true) {
+  
   intakeH.set(0.5);
   } else if (outtake.get() == true) {
     intakeH.set(-0.5);
@@ -81,6 +82,7 @@ public class Robot extends TimedRobot {
 
 
   if (dopen.get() == true && front.get() == true){
+        System.out.println("Opening door");
         door.set(0.75);
   } else if (din.get() && back.get() == true){
         door.set(-0.75);
