@@ -1,4 +1,3 @@
-
 package org.fhsrobo.Autonomous;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
