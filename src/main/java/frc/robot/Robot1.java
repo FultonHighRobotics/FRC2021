@@ -1,18 +1,16 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.cscore.VideoSink;
 
 public class Robot1 extends TimedRobot {
-
+  Encoder encoder = new Encoder(1,2,3, false);
+  //Encoder encoder2 = new Encoder(5,6,7);
   UsbCamera UsbCamera1;
   UsbCamera  UsBCamera2;
   VideoSink server; 
@@ -49,7 +47,8 @@ public class Robot1 extends TimedRobot {
   public void robotInit() {
     rearleft.follow(frontleft);
     rearright.follow(frontright);
-
+    encoder.reset();
+    encoder.setDistancePerPulse(1./256.);
     UsbCamera1 = CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
     server = CameraServer.getInstance().getServer();
@@ -57,22 +56,20 @@ public class Robot1 extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    encoder.reset();
     startTime = Timer.getFPGATimestamp();
   }
   
   @Override
   public void autonomousPeriodic() {
     final double time = Timer.getFPGATimestamp();
-
-  if (time - startTime < 3) {
-    frontleft.set(0.4);
-    rearleft.set(0.4); 
-  } else {
-    frontleft.set(0);
-    rearleft.set(0);
-    frontright.set(0);
-    rearright.set(0); 
-  }
+    System.out.println(encoder.getDistance());
+    if(encoder.getDistance() < 5){
+      maindrive.tankDrive(.5,.5);
+    }
+    else {
+      maindrive.tankDrive(0,0);
+    }
 
   }
   

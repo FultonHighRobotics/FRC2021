@@ -1,6 +1,6 @@
 package org.fhsrobo.Autonomous;
 
-public enum AutoState {
+public enum AutoDirection {
     BACKWARDS,
     FORWARDS
 }

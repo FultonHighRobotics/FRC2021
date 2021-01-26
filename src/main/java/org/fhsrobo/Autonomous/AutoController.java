@@ -12,7 +12,7 @@ public class AutoController implements IAutonomous{
         this.drive = DifDrive;
         this.robot = robo;
     }
-    private boolean CheckIfValid(AutoState state, double speed){
+    private boolean CheckIfValid(AutoDirection state, double speed){
         switch (state){
             case FORWARDS:
                 if ((speed <= 0) || (speed > 1)){
@@ -24,9 +24,7 @@ public class AutoController implements IAutonomous{
                     throw new UnsupportedOperation("That's not a supported speed");
                 }
 
-
-
-
+                
         }
         if (!robot.isAutonomous()){
             throw new RuntimeException("Robot isn't autonomous!");
@@ -35,6 +33,7 @@ public class AutoController implements IAutonomous{
             return true;
         }
     }
+
      @Override
      public void Forwards(double speed) {
 
